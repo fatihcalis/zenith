@@ -229,6 +229,8 @@ export default class BuildHelper extends WorkerHelper {
       const hash = this.hasher.getHash(buildPath, script, this.debug, this.compareWith, constantDependencies, additionalFiles || []);
       this.hasher.hashJSON[buildProject] = hash;
 
+      config[this.command].afterGetHashCallback?.(this, hash, buildProject);
+      
       if (this.skipPackageJson && !this.doesScriptExist(root, script)) {
         Logger.log(3, this.outputColor, 'Skipping project => ', buildProject, ' because it does not have the script => ', script);
         await this.buildResolver(buildProject);

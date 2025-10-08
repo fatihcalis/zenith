@@ -1,3 +1,5 @@
+import BuildHelper from "../classes/Builder/BuildHelper";
+
 export interface ProjectConfig {
   [key: string]: string;
 }
@@ -13,7 +15,8 @@ export interface TargetValue {
   constantDependencies?: Array<string>,
   compareRemoteHashes?: boolean,
   requiredFiles?: Array<string>,
-  additionalFiles?: Array<string>
+  additionalFiles?: Array<string>,
+  afterGetHashCallback?: ((builder: BuildHelper, hash: string, project: string) => void)
 }
 
 export interface TargetObject {
